@@ -4,7 +4,7 @@
 
 dump_dir: /tmp/
 name: "debug"
-steps: 100_000
+steps: 20
 probe_freq: null
 seed: 777
 optim:
@@ -68,18 +68,18 @@ model:
   downsampling_by_pooling: "max"
 
 data:
-  root_dir: ???
+  root_dir: ./data
   sources:
-    dclm_baseline_1.0: 1.0
+    fineweb_edu_10bt: 1.0
   batch_size: 2
   prefetch_size: 64
   seq_len: 4096
   load_async: true
-  preprocess_dir: ???
+  preprocess_dir: ./data/preprocess
   tokenizer_args:
     name: blt
     init_kwargs:
-      bpe_tokenizer_path: ???
+      bpe_tokenizer_path: /home/ubuntu/blt/tokenizers/9b5ad71b2ce5302211f9c61530b329a4922fc6a4
 
 profiling:
   run: false
