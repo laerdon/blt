@@ -124,7 +124,7 @@ fi
 uv --version
 
 echo "[4/7] creating venv"
-uv venv
+uv venv --allow-existing
 # shellcheck disable=SC1091
 source .venv/bin/activate
 echo "venv python: $(which python)"
@@ -174,27 +174,7 @@ mv -f "${FINEWEB_COMPLETE_FILE}" "${FINEWEB_SHARD_COMPLETE_FILE}"
 
 echo "reconstructing fineweb_edu_10bt jsonl chunk from arrow"
 mkdir -p "${BLT_FINEWEB_DATA_DIR}"
-python - "${FINEWEB_SHARD_ARROW_FILE}" "${FINEWEB_JSONL_FILE}" <<'PY'
-import json
-import sys
-
-import pyarrow.dataset as ds
-
-arrow_path, jsonl_path = sys.argv[1], sys.argv[2]
-dataset = ds.dataset([arrow_path], format="arrow")
-
-with open(jsonl_path, "w", encoding="utf-8") as out_f:
-    for batch in dataset.to_batches():
-        columns = batch.to_pydict()
-        for sample_id, text in zip(columns["sample_id"], columns["text"]):
-            out_f.write(
-                json.dumps(
-                    {"sample_id": str(sample_id), "text": text},
-                    ensure_ascii=False,
-                )
-            )
-            out_f.write("\n")
-PY
+bash "${SCRIPT_DIR}/arrow_to_jsonl.sh" "${FINEWEB_SHARD_ARROW_FILE}" "${FINEWEB_JSONL_FILE}"
 
 echo "verification:"
 python -c "import torch; print('torch:', torch.__version__, 'cuda:', torch.version.cuda, 'available:', torch.cuda.is_available())"
