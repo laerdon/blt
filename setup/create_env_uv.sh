@@ -58,6 +58,10 @@ ensure_user_writable_dir() {
 # gpu arch. a6000=8.6, a100=8.0, rtx 4090=8.9, h100=9.0. adjust if needed.
 export TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST:-8.6}"
 
+echo "preparing fineweb_edu_10bt entropy directory"
+mkdir -p "${BLT_FINEWEB_ENTROPY_DIR}"
+echo "entropy arrow files for fineweb_edu_10bt should go in: ${BLT_FINEWEB_ENTROPY_DIR}"
+
 echo "[1/7] installing system build dependencies"
 "${SUDO[@]}" apt-get update
 "${SUDO[@]}" apt-get install -y \
@@ -130,10 +134,6 @@ uv pip install --group compile_xformers --no-build-isolation
 
 echo "[7/7] syncing remaining project dependencies"
 uv sync
-
-echo "preparing fineweb_edu_10bt entropy directory"
-mkdir -p "${BLT_FINEWEB_ENTROPY_DIR}"
-echo "entropy arrow files for fineweb_edu_10bt should go in: ${BLT_FINEWEB_ENTROPY_DIR}"
 
 echo "verification:"
 python -c "import torch; print('torch:', torch.__version__, 'cuda:', torch.version.cuda, 'available:', torch.cuda.is_available())"
