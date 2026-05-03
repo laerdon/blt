@@ -8,13 +8,16 @@ name: h100_fineweb_1p7b_bs8_hash345
 model:
   encoder_hash_byte_group_size: [3, 4, 5]
   encoder_hash_byte_group_nb_functions: 1
+  encoder_hash_byte_group_vocab: 20000
+  n_layers_global: 16
 
 steps: 25940
 max_steps: 25940
 seed: 777
 
+grad_acc_steps: 4
 data:
-  batch_size: 8
+  batch_size: 2
 
 optim:
   lr: 3e-3

@@ -1,0 +1,9 @@
+# h100 BLT run matching h100_fineweb_1p7b_bs8_hash345, but with learned
+# scalar weights for the 3/4/5 hash byte-group embedding tables.
+config: bytelatent/configs/h100_fineweb_1p7b_bs8_hash345.yaml
+
+dump_dir: ./runs/h100_fineweb_1p7b_bs8_hash345_weighted
+name: h100_fineweb_1p7b_bs8_hash345_weighted
+
+model:
+  encoder_hash_use_learnable_weights: true

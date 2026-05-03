@@ -459,6 +459,7 @@ class ByteLatentTransformerArgs(BaseTransformerArgs):
     encoder_hash_byte_group_size: Any | None = None
     encoder_hash_byte_group_vocab: int = 30000
     encoder_hash_byte_group_nb_functions: int = 3
+    encoder_hash_use_learnable_weights: bool = False
 
     # Model behavior and optimization
     log_patch_lengths: bool = False
@@ -869,6 +870,9 @@ class ByteLatentTransformer(
         self.encoder_hash_byte_group_nb_functions = (
             args.encoder_hash_byte_group_nb_functions
         )
+        self.encoder_hash_use_learnable_weights = (
+            args.encoder_hash_use_learnable_weights
+        )
 
         # ByteLatent modules
         self.local_encoder = create_local_encoder(args)
@@ -880,11 +884,14 @@ class ByteLatentTransformer(
             local_encoder_dim=self.local_encoder.dim,
             encoder_hash_byte_group_size=self.encoder_hash_byte_group_size,
         )
-        # self.encoder_hash_tok_weights = None
-        # if self.encoder_hash_tok_embedding is not None:
-        #     self.encoder_hash_tok_weights = nn.Parameter(
-        #         torch.ones(len(self.encoder_hash_tok_embedding), dtype=torch.float32)
-        #     )
+        self.encoder_hash_tok_weights = None
+        if (
+            self.encoder_hash_use_learnable_weights
+            and self.encoder_hash_tok_embedding is not None
+        ):
+            self.encoder_hash_tok_weights = nn.Parameter(
+                torch.ones(len(self.encoder_hash_tok_embedding), dtype=torch.float32)
+            )
         self.encoder_ngram_embedding = init_embeddings(
             args,
             EmbeddingType.NGRAM,
@@ -991,23 +998,25 @@ class ByteLatentTransformer(
             )
 
         # Hashing and embedding
-        local_encoder_embeds = compute_hash_embeddings(
-            local_encoder_tokens=local_encoder_tokens,
-            local_encoder=self.local_encoder,
-            encoder_hash_tok_embedding=self.encoder_hash_tok_embedding,
-            encoder_hash_byte_group_nb_functions=self.encoder_hash_byte_group_nb_functions,
-            encoder_hash_byte_group_size=self.encoder_hash_byte_group_size,
-            encoder_hash_byte_group_vocab=self.encoder_hash_byte_group_vocab,
-        )
-        # local_encoder_embeds = compute_hash_embeddings_with_learnable_weights(
-        #     local_encoder_tokens=local_encoder_tokens,
-        #     local_encoder=self.local_encoder,
-        #     encoder_hash_tok_embedding=self.encoder_hash_tok_embedding,
-        #     encoder_hash_tok_weights=self.encoder_hash_tok_weights,
-        #     encoder_hash_byte_group_nb_functions=self.encoder_hash_byte_group_nb_functions,
-        #     encoder_hash_byte_group_size=self.encoder_hash_byte_group_size,
-        #     encoder_hash_byte_group_vocab=self.encoder_hash_byte_group_vocab,
-        # )
+        if self.encoder_hash_use_learnable_weights:
+            local_encoder_embeds = compute_hash_embeddings_with_learnable_weights(
+                local_encoder_tokens=local_encoder_tokens,
+                local_encoder=self.local_encoder,
+                encoder_hash_tok_embedding=self.encoder_hash_tok_embedding,
+                encoder_hash_tok_weights=self.encoder_hash_tok_weights,
+                encoder_hash_byte_group_nb_functions=self.encoder_hash_byte_group_nb_functions,
+                encoder_hash_byte_group_size=self.encoder_hash_byte_group_size,
+                encoder_hash_byte_group_vocab=self.encoder_hash_byte_group_vocab,
+            )
+        else:
+            local_encoder_embeds = compute_hash_embeddings(
+                local_encoder_tokens=local_encoder_tokens,
+                local_encoder=self.local_encoder,
+                encoder_hash_tok_embedding=self.encoder_hash_tok_embedding,
+                encoder_hash_byte_group_nb_functions=self.encoder_hash_byte_group_nb_functions,
+                encoder_hash_byte_group_size=self.encoder_hash_byte_group_size,
+                encoder_hash_byte_group_vocab=self.encoder_hash_byte_group_vocab,
+            )
 
         # N-gram table embeddings
         if self.encoder_ngram_embedding is not None:
@@ -1121,5 +1130,5 @@ class ByteLatentTransformer(
                     a=-3 * emb_std,
                     b=3 * emb_std,
                 )
-        # if self.encoder_hash_tok_weights is not None:
-        #     nn.init.ones_(self.encoder_hash_tok_weights)
+        if self.encoder_hash_tok_weights is not None:
+            nn.init.ones_(self.encoder_hash_tok_weights)
