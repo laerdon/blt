@@ -764,7 +764,51 @@ def compute_hash_embeddings(
             i += 1
 
     assert i == len(encoder_hash_tok_embedding)
-    return local_encoder_embeds
+    return local_encoder_embeds / (i + 1)
+
+
+def compute_hash_embeddings_with_learnable_weights(
+    local_encoder_tokens: torch.Tensor,
+    local_encoder,
+    encoder_hash_tok_embedding: nn.ModuleList,
+    encoder_hash_tok_weights: nn.Parameter,
+    encoder_hash_byte_group_nb_functions: int,
+    encoder_hash_byte_group_size: list,
+    encoder_hash_byte_group_vocab: int,
+) -> torch.Tensor:
+    """
+    Compute hash-token embeddings using one learnable scalar per hash table.
+    """
+    if encoder_hash_tok_embedding is None:
+        return None
+
+    assert encoder_hash_tok_embedding is not None
+    assert encoder_hash_tok_weights is not None
+    assert encoder_hash_tok_weights.shape[0] == len(encoder_hash_tok_embedding), (
+        f"encoder_hash_tok_weights.shape[0]={encoder_hash_tok_weights.shape[0]} "
+        f"versus len(encoder_hash_tok_embedding)={len(encoder_hash_tok_embedding)}"
+    )
+
+    local_encoder_embeds = local_encoder.tok_embeddings(local_encoder_tokens)
+
+    i = 0
+    for func_nb in range(encoder_hash_byte_group_nb_functions):
+        for byte_group_size in encoder_hash_byte_group_size:
+            hash_ids = byte_group_hash_function(
+                local_encoder_tokens,
+                byte_group_size,
+                hash_func_nb=func_nb,
+                max_hash=encoder_hash_byte_group_vocab,
+            )
+            hash_tok_embedding = encoder_hash_tok_embedding[i]
+            hash_embeds = hash_tok_embedding(hash_ids)
+            local_encoder_embeds = (
+                local_encoder_embeds + encoder_hash_tok_weights[i] * hash_embeds
+            )
+            i += 1
+
+    assert i == len(encoder_hash_tok_embedding)
+    return local_encoder_embeds / (i + 1)
 
 
 class ByteLatentTransformer(
@@ -836,6 +880,11 @@ class ByteLatentTransformer(
             local_encoder_dim=self.local_encoder.dim,
             encoder_hash_byte_group_size=self.encoder_hash_byte_group_size,
         )
+        # self.encoder_hash_tok_weights = None
+        # if self.encoder_hash_tok_embedding is not None:
+        #     self.encoder_hash_tok_weights = nn.Parameter(
+        #         torch.ones(len(self.encoder_hash_tok_embedding), dtype=torch.float32)
+        #     )
         self.encoder_ngram_embedding = init_embeddings(
             args,
             EmbeddingType.NGRAM,
@@ -950,6 +999,15 @@ class ByteLatentTransformer(
             encoder_hash_byte_group_size=self.encoder_hash_byte_group_size,
             encoder_hash_byte_group_vocab=self.encoder_hash_byte_group_vocab,
         )
+        # local_encoder_embeds = compute_hash_embeddings_with_learnable_weights(
+        #     local_encoder_tokens=local_encoder_tokens,
+        #     local_encoder=self.local_encoder,
+        #     encoder_hash_tok_embedding=self.encoder_hash_tok_embedding,
+        #     encoder_hash_tok_weights=self.encoder_hash_tok_weights,
+        #     encoder_hash_byte_group_nb_functions=self.encoder_hash_byte_group_nb_functions,
+        #     encoder_hash_byte_group_size=self.encoder_hash_byte_group_size,
+        #     encoder_hash_byte_group_vocab=self.encoder_hash_byte_group_vocab,
+        # )
 
         # N-gram table embeddings
         if self.encoder_ngram_embedding is not None:
@@ -1054,11 +1112,14 @@ class ByteLatentTransformer(
         self.local_decoder.init_weights()
 
         emb_std = self.local_encoder.dim ** (-0.5)
-        for emb in self.encoder_hash_tok_embedding:
-            nn.init.trunc_normal_(
-                emb.weight,
-                mean=0.0,
-                std=emb_std,
-                a=-3 * emb_std,
-                b=3 * emb_std,
-            )
+        if self.encoder_hash_tok_embedding is not None:
+            for emb in self.encoder_hash_tok_embedding:
+                nn.init.trunc_normal_(
+                    emb.weight,
+                    mean=0.0,
+                    std=emb_std,
+                    a=-3 * emb_std,
+                    b=3 * emb_std,
+                )
+        # if self.encoder_hash_tok_weights is not None:
+        #     nn.init.ones_(self.encoder_hash_tok_weights)

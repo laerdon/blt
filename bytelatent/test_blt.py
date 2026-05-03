@@ -14,6 +14,7 @@ from bytelatent.model.blt import (
     ByteLatentTransformerArgs,
     EmbeddingType,
     compute_hash_embeddings,
+    compute_hash_embeddings_with_learnable_weights,
     create_global_transformer,
     create_local_decoder,
     create_local_encoder,
@@ -111,6 +112,42 @@ def create_args(cross_attention=False):
         eos_id=EOS_ID,
     )
     return transformer_args
+
+
+def test_compute_hash_embeddings_with_learnable_weights():
+    class DummyLocalEncoder(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.tok_embeddings = torch.nn.Embedding(32, 1)
+
+    local_encoder = DummyLocalEncoder()
+    with torch.no_grad():
+        local_encoder.tok_embeddings.weight.zero_()
+
+    local_encoder_tokens = torch.tensor([[1, 2, 3, 4]], dtype=torch.int64)
+    encoder_hash_tok_embedding = torch.nn.ModuleList(
+        [torch.nn.Embedding(16, 1), torch.nn.Embedding(16, 1)]
+    )
+    with torch.no_grad():
+        encoder_hash_tok_embedding[0].weight.fill_(2.0)
+        encoder_hash_tok_embedding[1].weight.fill_(5.0)
+
+    encoder_hash_tok_weights = torch.nn.Parameter(
+        torch.tensor([0.5, 1.5], dtype=torch.float32)
+    )
+
+    output = compute_hash_embeddings_with_learnable_weights(
+        local_encoder_tokens=local_encoder_tokens,
+        local_encoder=local_encoder,
+        encoder_hash_tok_embedding=encoder_hash_tok_embedding,
+        encoder_hash_tok_weights=encoder_hash_tok_weights,
+        encoder_hash_byte_group_nb_functions=2,
+        encoder_hash_byte_group_size=[4],
+        encoder_hash_byte_group_vocab=16,
+    )
+
+    expected = torch.full((1, 4, 1), 8.5 / 3.0, dtype=torch.float32)
+    torch.testing.assert_close(output, expected)
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA is not available")
