@@ -1,0 +1,15 @@
+# continue the 49m gpt-2 hf run in the same output folder.
+config: apps/main/configs/gpt2_hf_49m_fineweb1p7b.yaml
+
+# the trainer stops when either limit is reached, so both need to move past the
+# checkpoint step. 51,880 is one additional 25,940-step pass.
+steps: 51880
+max_steps: 51880
+
+checkpoint:
+  resume_from: ./runs/gpt2_hf_49m_fineweb_1p7b/checkpoints/checkpoint-0000025940
+  dump:
+    keep: -1
+
+optim:
+  scheduler_steps: 25940
