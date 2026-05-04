@@ -2,8 +2,8 @@
 # using hash byte group sizes 3, 4, and 5 with one hash function each.
 config: bytelatent/configs/h100_fineweb_1p7b_bs8.yaml
 
-dump_dir: ./runs/h100_fineweb_1p7b_bs8_hash345
-name: h100_fineweb_1p7b_bs8_hash345
+dump_dir: ./runs/percentage
+name: percentage
 
 model:
   encoder_hash_byte_group_size: [3, 4, 5]
