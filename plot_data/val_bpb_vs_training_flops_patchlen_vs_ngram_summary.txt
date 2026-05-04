@@ -1,0 +1,6 @@
+PatchLen Sin flops/token ~= 634259968.00
+Baseline Ngram flops/token ~= 634259968.00
+PatchLen Sin tokens/step ~= 262144.00
+Baseline Ngram tokens/step ~= 65536.00
+PatchLen Sin latest: step 10376, tokens 2.720e+09, flops 1.725e+18, bpb 1.306441
+Baseline closest: step 10376, tokens 6.800e+08, flops 4.313e+17, bpb 1.230153

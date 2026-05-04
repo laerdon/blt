@@ -1,0 +1,6 @@
+PatchLen Sin v2 flops/token ~= 634259968.00
+Baseline Ngram flops/token ~= 634259968.00
+PatchLen Sin v2 tokens/step ~= 65536.00
+Baseline Ngram tokens/step ~= 65536.00
+PatchLen Sin v2 latest checkpoint: step 15564, tokens 1.020e+09, flops 6.469e+17, bpb 1.258351
+Closest baseline checkpoint: step 15564, tokens 1.020e+09, flops 6.469e+17, bpb 1.216642

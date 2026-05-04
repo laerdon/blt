@@ -22,6 +22,7 @@ from bytelatent.model.blt import (
     decoder_patch_ids_from_lengths,
     get_blt_input,
     init_embeddings,
+    patch_length_to_sinusoidal_embedding,
     patch_ids_from_lengths,
 )
 from bytelatent.model.latent_transformer import CrossAttention
@@ -143,6 +144,23 @@ def test_forward_sliding_trigram_uses_previous_six_windows():
     expected = expected_counts * 3.5
     torch.testing.assert_close(output[0, :, 0], expected)
     assert output[0, 10, 0].item() == pytest.approx(21.0)
+
+
+def test_patch_length_sinusoidal_embedding_zero_padding_is_zero():
+    patch_lengths = torch.tensor([[0, 1, 4, 0]], dtype=torch.long)
+    emb = patch_length_to_sinusoidal_embedding(patch_lengths, dim=8)
+
+    assert emb.shape == (1, 4, 8)
+    torch.testing.assert_close(emb[0, 0], torch.zeros(8))
+    torch.testing.assert_close(emb[0, 3], torch.zeros(8))
+
+
+def test_patch_length_sinusoidal_embedding_distinguishes_lengths():
+    patch_lengths = torch.tensor([[1, 2]], dtype=torch.long)
+    emb = patch_length_to_sinusoidal_embedding(patch_lengths, dim=8)
+
+    assert emb.shape == (1, 2, 8)
+    assert not torch.allclose(emb[0, 0], emb[0, 1])
 
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA is not available")

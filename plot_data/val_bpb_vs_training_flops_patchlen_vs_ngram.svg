@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620">
+<style>text{font-family:Arial,sans-serif;fill:#1f2937}.small{font-size:12px}.axis{font-size:13px}.title{font-size:22px;font-weight:700}.subtitle{font-size:13px;fill:#4b5563}</style>
+<rect width="1000" height="620" fill="white"/>
+<text x="90" y="28" class="title">Validation BPB vs Total Training FLOPs</text>
+<text x="90" y="48" class="subtitle">Patch-length sinusoid vs h100_fineweb_1p7b_bs8_ngram</text>
+<line x1="90" y1="540.0" x2="970" y2="540.0" stroke="#e5e7eb"/>
+<text x="78" y="544.0" text-anchor="end" class="small">1.155</text>
+<line x1="90" y1="440.0" x2="970" y2="440.0" stroke="#e5e7eb"/>
+<text x="78" y="444.0" text-anchor="end" class="small">1.237</text>
+<line x1="90" y1="340.0" x2="970" y2="340.0" stroke="#e5e7eb"/>
+<text x="78" y="344.0" text-anchor="end" class="small">1.320</text>
+<line x1="90" y1="240.0" x2="970" y2="240.0" stroke="#e5e7eb"/>
+<text x="78" y="244.0" text-anchor="end" class="small">1.402</text>
+<line x1="90" y1="140.0" x2="970" y2="140.0" stroke="#e5e7eb"/>
+<text x="78" y="144.0" text-anchor="end" class="small">1.485</text>
+<line x1="90" y1="40.0" x2="970" y2="40.0" stroke="#e5e7eb"/>
+<text x="78" y="44.0" text-anchor="end" class="small">1.567</text>
+<line x1="90.0" y1="40" x2="90.0" y2="540" stroke="#f1f5f9"/>
+<text x="90.0" y="564" text-anchor="middle" class="small">-79.79</text>
+<line x1="266.0" y1="40" x2="266.0" y2="540" stroke="#f1f5f9"/>
+<text x="266.0" y="564" text-anchor="middle" class="small">307.95</text>
+<line x1="442.0" y1="40" x2="442.0" y2="540" stroke="#f1f5f9"/>
+<text x="442.0" y="564" text-anchor="middle" class="small">695.68</text>
+<line x1="618.0" y1="40" x2="618.0" y2="540" stroke="#f1f5f9"/>
+<text x="618.0" y="564" text-anchor="middle" class="small">1083.42</text>
+<line x1="794.0" y1="40" x2="794.0" y2="540" stroke="#f1f5f9"/>
+<text x="794.0" y="564" text-anchor="middle" class="small">1471.16</text>
+<line x1="970.0" y1="40" x2="970.0" y2="540" stroke="#f1f5f9"/>
+<text x="970.0" y="564" text-anchor="middle" class="small">1858.89</text>
+<line x1="90" y1="540" x2="970" y2="540" stroke="#111827"/>
+<line x1="90" y1="40" x2="90" y2="540" stroke="#111827"/>
+<text x="530.0" y="602" text-anchor="middle" class="axis">Total training FLOPs (×10¹⁵)</text>
+<text x="22" y="290.0" transform="rotate(-90 22 290.0)" text-anchor="middle" class="axis">Validation bpb</text>
+<path d="M 322.0 375.5 L 419.9 433.7 L 517.8 443.5 L 615.7 482.3 L 713.5 326.9 L 811.4 356.1 L 909.3 356.1" fill="none" stroke="#d9480f" stroke-width="3"/>
+<circle cx="322.0" cy="375.5" r="5" fill="#d9480f"/>
+<text x="330.0" y="367.5" class="small">step 2594</text>
+<circle cx="419.9" cy="433.7" r="5" fill="#d9480f"/>
+<text x="427.9" y="425.7" class="small">step 3891</text>
+<circle cx="517.8" cy="443.5" r="5" fill="#d9480f"/>
+<text x="525.8" y="435.5" class="small">step 5188</text>
+<circle cx="615.7" cy="482.3" r="5" fill="#d9480f"/>
+<text x="623.7" y="474.3" class="small">step 6485</text>
+<circle cx="713.5" cy="326.9" r="5" fill="#d9480f"/>
+<text x="721.5" y="318.9" class="small">step 7782</text>
+<circle cx="811.4" cy="356.1" r="5" fill="#d9480f"/>
+<text x="819.4" y="348.1" class="small">step 9079</text>
+<circle cx="909.3" cy="356.1" r="5" fill="#d9480f"/>
+<text x="917.3" y="348.1" class="small">step 10376</text>
+<path d="M 150.7 97.7 L 175.2 288.4 L 199.6 355.1 L 224.1 388.3 L 248.6 410.3 L 273.0 427.7 L 297.5 437.8 L 322.0 448.5 L 346.5 458.8 L 370.9 461.0 L 395.4 467.8 L 419.9 464.9" fill="none" stroke="#1c7ed6" stroke-width="3"/>
+<circle cx="150.7" cy="97.7" r="5" fill="#1c7ed6"/>
+<text x="158.7" y="89.7" class="small">step 1297</text>
+<circle cx="175.2" cy="288.4" r="5" fill="#1c7ed6"/>
+<text x="183.2" y="280.4" class="small">step 2594</text>
+<circle cx="199.6" cy="355.1" r="5" fill="#1c7ed6"/>
+<text x="207.6" y="347.1" class="small">step 3891</text>
+<circle cx="224.1" cy="388.3" r="5" fill="#1c7ed6"/>
+<text x="232.1" y="380.3" class="small">step 5188</text>
+<circle cx="248.6" cy="410.3" r="5" fill="#1c7ed6"/>
+<text x="256.6" y="402.3" class="small">step 6485</text>
+<circle cx="273.0" cy="427.7" r="5" fill="#1c7ed6"/>
+<text x="281.0" y="419.7" class="small">step 7782</text>
+<circle cx="297.5" cy="437.8" r="5" fill="#1c7ed6"/>
+<text x="305.5" y="429.8" class="small">step 9079</text>
+<circle cx="322.0" cy="448.5" r="5" fill="#1c7ed6"/>
+<text x="330.0" y="440.5" class="small">step 10376</text>
+<circle cx="346.5" cy="458.8" r="5" fill="#1c7ed6"/>
+<text x="354.5" y="450.8" class="small">step 11673</text>
+<circle cx="370.9" cy="461.0" r="5" fill="#1c7ed6"/>
+<text x="378.9" y="453.0" class="small">step 12970</text>
+<circle cx="395.4" cy="467.8" r="5" fill="#1c7ed6"/>
+<text x="403.4" y="459.8" class="small">step 14267</text>
+<circle cx="419.9" cy="464.9" r="5" fill="#1c7ed6"/>
+<text x="427.9" y="456.9" class="small">step 15564</text>
+<rect x="760" y="70" width="190" height="58" rx="8" fill="white" stroke="#d1d5db"/>
+<line x1="772" y1="88" x2="794" y2="88" stroke="#d9480f" stroke-width="3"/>
+<circle cx="783" cy="88" r="4" fill="#d9480f"/>
+<text x="802" y="92" class="small">PatchLen Sin</text>
+<line x1="772" y1="110" x2="794" y2="110" stroke="#1c7ed6" stroke-width="3"/>
+<circle cx="783" cy="110" r="4" fill="#1c7ed6"/>
+<text x="802" y="114" class="small">Baseline Ngram</text>
+<text x="90" y="570" class="small">PatchLen latest: step 10376, bpb 1.306, tokens 2.720B, flops 1725.19e15</text>
+<text x="90" y="588" class="small">Closest baseline step 10376: bpb 1.230, tokens 0.680B, flops 431.30e15</text>
+</svg>

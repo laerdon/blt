@@ -66,6 +66,7 @@ model:
   local_attention_window_len: 512
   max_seqlen: 12288
   downsampling_by_pooling: "max"
+  use_patch_length_sinusoidal_embedding: false
 
 data:
   root_dir: ./data

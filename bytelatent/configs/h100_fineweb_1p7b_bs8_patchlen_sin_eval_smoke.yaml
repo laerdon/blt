@@ -1,0 +1,26 @@
+config: bytelatent/configs/h100_fineweb_1p7b_bs8_patchlen_sin.yaml
+
+dump_dir: ./runs/h100_fineweb_1p7b_bs8_patchlen_sin_eval_smoke
+name: h100_fineweb_1p7b_bs8_patchlen_sin_eval_smoke
+
+steps: 1
+max_steps: 1
+
+data:
+  batch_size: 1
+
+checkpoint:
+  dump:
+    every: 1
+    keep: 1
+  eval:
+    every: 1
+    keep: 1
+
+logging:
+  freq: 1
+
+eval:
+  validation:
+    max_n_batches: 1
+    batch_size: 1

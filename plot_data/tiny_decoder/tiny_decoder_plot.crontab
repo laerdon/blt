@@ -1,0 +1,1 @@
+*/2 * * * * /alloc/blt/plot_data/tiny_decoder/update_tiny_decoder_plot.sh >> /alloc/blt/plot_data/tiny_decoder/cron.log 2>&1

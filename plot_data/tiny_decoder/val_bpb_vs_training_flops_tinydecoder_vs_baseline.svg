@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620">
+<style>text{font-family:Arial,sans-serif;fill:#1f2937}.small{font-size:12px}.axis{font-size:13px}.title{font-size:22px;font-weight:700}.subtitle{font-size:13px;fill:#4b5563}</style>
+<rect width="1000" height="620" fill="white"/>
+<text x="90" y="28" class="title">Validation BPB vs Total Training FLOPs</text>
+<text x="90" y="48" class="subtitle">Tiny decoder checkpoints vs initial BLT baseline ngram run</text>
+<line x1="90" y1="540.0" x2="970" y2="540.0" stroke="#e5e7eb"/>
+<text x="78" y="544.0" text-anchor="end" class="small">1.148</text>
+<line x1="90" y1="440.0" x2="970" y2="440.0" stroke="#e5e7eb"/>
+<text x="78" y="444.0" text-anchor="end" class="small">1.241</text>
+<line x1="90" y1="340.0" x2="970" y2="340.0" stroke="#e5e7eb"/>
+<text x="78" y="344.0" text-anchor="end" class="small">1.334</text>
+<line x1="90" y1="240.0" x2="970" y2="240.0" stroke="#e5e7eb"/>
+<text x="78" y="244.0" text-anchor="end" class="small">1.428</text>
+<line x1="90" y1="140.0" x2="970" y2="140.0" stroke="#e5e7eb"/>
+<text x="78" y="144.0" text-anchor="end" class="small">1.521</text>
+<line x1="90" y1="40.0" x2="970" y2="40.0" stroke="#e5e7eb"/>
+<text x="78" y="44.0" text-anchor="end" class="small">1.614</text>
+<line x1="90.0" y1="40" x2="90.0" y2="540" stroke="#f1f5f9"/>
+<text x="90.0" y="564" text-anchor="middle" class="small">5.28</text>
+<line x1="266.0" y1="40" x2="266.0" y2="540" stroke="#f1f5f9"/>
+<text x="266.0" y="564" text-anchor="middle" class="small">146.31</text>
+<line x1="442.0" y1="40" x2="442.0" y2="540" stroke="#f1f5f9"/>
+<text x="442.0" y="564" text-anchor="middle" class="small">287.33</text>
+<line x1="618.0" y1="40" x2="618.0" y2="540" stroke="#f1f5f9"/>
+<text x="618.0" y="564" text-anchor="middle" class="small">428.35</text>
+<line x1="794.0" y1="40" x2="794.0" y2="540" stroke="#f1f5f9"/>
+<text x="794.0" y="564" text-anchor="middle" class="small">569.37</text>
+<line x1="970.0" y1="40" x2="970.0" y2="540" stroke="#f1f5f9"/>
+<text x="970.0" y="564" text-anchor="middle" class="small">710.39</text>
+<line x1="90" y1="540" x2="970" y2="540" stroke="#111827"/>
+<line x1="90" y1="40" x2="90" y2="540" stroke="#111827"/>
+<text x="530.0" y="602" text-anchor="middle" class="axis">Total training FLOPs (x10^15)</text>
+<text x="22" y="290.0" transform="rotate(-90 22 290.0)" text-anchor="middle" class="axis">Validation bpb</text>
+<path d="M 152.2 111.4 L 221.1 263.3 L 289.9 316.0 L 358.7 351.7 L 427.5 356.4 L 496.4 371.9 L 565.2 366.4 L 634.0 370.1 L 702.8 372.3 L 771.7 370.0 L 840.5 350.5 L 909.3 372.8" fill="none" stroke="#d9480f" stroke-width="3"/>
+<circle cx="152.2" cy="111.4" r="5" fill="#d9480f"/>
+<text x="160.2" y="103.4" class="small">step 1297</text>
+<circle cx="221.1" cy="263.3" r="5" fill="#d9480f"/>
+<text x="229.1" y="255.3" class="small">step 2594</text>
+<circle cx="289.9" cy="316.0" r="5" fill="#d9480f"/>
+<text x="297.9" y="308.0" class="small">step 3891</text>
+<circle cx="358.7" cy="351.7" r="5" fill="#d9480f"/>
+<text x="366.7" y="343.7" class="small">step 5188</text>
+<circle cx="427.5" cy="356.4" r="5" fill="#d9480f"/>
+<text x="435.5" y="348.4" class="small">step 6485</text>
+<circle cx="496.4" cy="371.9" r="5" fill="#d9480f"/>
+<text x="504.4" y="363.9" class="small">step 7782</text>
+<circle cx="565.2" cy="366.4" r="5" fill="#d9480f"/>
+<text x="573.2" y="358.4" class="small">step 9079</text>
+<circle cx="634.0" cy="370.1" r="5" fill="#d9480f"/>
+<text x="642.0" y="362.1" class="small">step 10376</text>
+<circle cx="702.8" cy="372.3" r="5" fill="#d9480f"/>
+<text x="710.8" y="364.3" class="small">step 11673</text>
+<circle cx="771.7" cy="370.0" r="5" fill="#d9480f"/>
+<text x="779.7" y="362.0" class="small">step 12970</text>
+<circle cx="840.5" cy="350.5" r="5" fill="#d9480f"/>
+<text x="848.5" y="342.5" class="small">step 14267</text>
+<circle cx="909.3" cy="372.8" r="5" fill="#d9480f"/>
+<text x="917.3" y="364.8" class="small">step 15564</text>
+<path d="M 150.7 141.5 L 218.0 310.1 L 285.3 369.0 L 352.5 398.3 L 419.8 417.8 L 487.1 433.1 L 554.4 442.1 L 621.7 451.5 L 689.0 460.6 L 756.3 462.6 L 823.5 468.6 L 890.8 466.0" fill="none" stroke="#1c7ed6" stroke-width="3"/>
+<circle cx="150.7" cy="141.5" r="5" fill="#1c7ed6"/>
+<text x="158.7" y="133.5" class="small">step 1297</text>
+<circle cx="218.0" cy="310.1" r="5" fill="#1c7ed6"/>
+<text x="226.0" y="302.1" class="small">step 2594</text>
+<circle cx="285.3" cy="369.0" r="5" fill="#1c7ed6"/>
+<text x="293.3" y="361.0" class="small">step 3891</text>
+<circle cx="352.5" cy="398.3" r="5" fill="#1c7ed6"/>
+<text x="360.5" y="390.3" class="small">step 5188</text>
+<circle cx="419.8" cy="417.8" r="5" fill="#1c7ed6"/>
+<text x="427.8" y="409.8" class="small">step 6485</text>
+<circle cx="487.1" cy="433.1" r="5" fill="#1c7ed6"/>
+<text x="495.1" y="425.1" class="small">step 7782</text>
+<circle cx="554.4" cy="442.1" r="5" fill="#1c7ed6"/>
+<text x="562.4" y="434.1" class="small">step 9079</text>
+<circle cx="621.7" cy="451.5" r="5" fill="#1c7ed6"/>
+<text x="629.7" y="443.5" class="small">step 10376</text>
+<circle cx="689.0" cy="460.6" r="5" fill="#1c7ed6"/>
+<text x="697.0" y="452.6" class="small">step 11673</text>
+<circle cx="756.3" cy="462.6" r="5" fill="#1c7ed6"/>
+<text x="764.3" y="454.6" class="small">step 12970</text>
+<circle cx="823.5" cy="468.6" r="5" fill="#1c7ed6"/>
+<text x="831.5" y="460.6" class="small">step 14267</text>
+<circle cx="890.8" cy="466.0" r="5" fill="#1c7ed6"/>
+<text x="898.8" y="458.0" class="small">step 15564</text>
+<rect x="760" y="70" width="190" height="58" rx="8" fill="white" stroke="#d1d5db"/>
+<line x1="772" y1="88" x2="794" y2="88" stroke="#d9480f" stroke-width="3"/>
+<circle cx="783" cy="88" r="4" fill="#d9480f"/>
+<text x="802" y="92" class="small">Tiny Decoder</text>
+<line x1="772" y1="110" x2="794" y2="110" stroke="#1c7ed6" stroke-width="3"/>
+<circle cx="783" cy="110" r="4" fill="#1c7ed6"/>
+<text x="802" y="114" class="small">Baseline Ngram</text>
+<text x="90" y="570" class="small">Baseline latest: step 15564, bpb 1.217, flops 646.95e15</text>
+<text x="90" y="588" class="small">Tiny decoder latest: step 15564, bpb 1.304, flops 661.76e15. Closest baseline step 15564: bpb 1.217</text>
+</svg>

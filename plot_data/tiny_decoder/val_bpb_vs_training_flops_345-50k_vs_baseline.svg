@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620">
+<style>text{font-family:Arial,sans-serif;fill:#1f2937}.small{font-size:12px}.axis{font-size:13px}.title{font-size:22px;font-weight:700}.subtitle{font-size:13px;fill:#4b5563}</style>
+<rect width="1000" height="620" fill="white"/>
+<text x="90" y="28" class="title">Validation BPB vs Total Training FLOPs</text>
+<text x="90" y="48" class="subtitle">Hash345 50k checkpoints vs initial BLT baseline ngram run</text>
+<line x1="90" y1="540.0" x2="970" y2="540.0" stroke="#e5e7eb"/>
+<text x="78" y="544.0" text-anchor="end" class="small">1.153</text>
+<line x1="90" y1="440.0" x2="970" y2="440.0" stroke="#e5e7eb"/>
+<text x="78" y="444.0" text-anchor="end" class="small">1.239</text>
+<line x1="90" y1="340.0" x2="970" y2="340.0" stroke="#e5e7eb"/>
+<text x="78" y="344.0" text-anchor="end" class="small">1.325</text>
+<line x1="90" y1="240.0" x2="970" y2="240.0" stroke="#e5e7eb"/>
+<text x="78" y="244.0" text-anchor="end" class="small">1.412</text>
+<line x1="90" y1="140.0" x2="970" y2="140.0" stroke="#e5e7eb"/>
+<text x="78" y="144.0" text-anchor="end" class="small">1.498</text>
+<line x1="90" y1="40.0" x2="970" y2="40.0" stroke="#e5e7eb"/>
+<text x="78" y="44.0" text-anchor="end" class="small">1.585</text>
+<line x1="90.0" y1="40" x2="90.0" y2="540" stroke="#f1f5f9"/>
+<text x="90.0" y="564" text-anchor="middle" class="small">6.47</text>
+<line x1="266.0" y1="40" x2="266.0" y2="540" stroke="#f1f5f9"/>
+<text x="266.0" y="564" text-anchor="middle" class="small">144.05</text>
+<line x1="442.0" y1="40" x2="442.0" y2="540" stroke="#f1f5f9"/>
+<text x="442.0" y="564" text-anchor="middle" class="small">281.64</text>
+<line x1="618.0" y1="40" x2="618.0" y2="540" stroke="#f1f5f9"/>
+<text x="618.0" y="564" text-anchor="middle" class="small">419.22</text>
+<line x1="794.0" y1="40" x2="794.0" y2="540" stroke="#f1f5f9"/>
+<text x="794.0" y="564" text-anchor="middle" class="small">556.81</text>
+<line x1="970.0" y1="40" x2="970.0" y2="540" stroke="#f1f5f9"/>
+<text x="970.0" y="564" text-anchor="middle" class="small">694.39</text>
+<line x1="90" y1="540" x2="970" y2="540" stroke="#111827"/>
+<line x1="90" y1="40" x2="90" y2="540" stroke="#111827"/>
+<text x="530.0" y="602" text-anchor="middle" class="axis">Total training FLOPs (x10^15)</text>
+<text x="22" y="290.0" transform="rotate(-90 22 290.0)" text-anchor="middle" class="axis">Validation bpb</text>
+<path d="M 150.7 111.4 L 219.7 269.1 L 288.6 334.0 L 357.6 361.9 L 426.5 371.1 L 495.5 408.2 L 564.5 380.4 L 633.4 408.2 L 702.4 417.5 L 771.4 426.8 L 840.3 417.5 L 909.3 426.8" fill="none" stroke="#d9480f" stroke-width="3"/>
+<circle cx="150.7" cy="111.4" r="5" fill="#d9480f"/>
+<text x="158.7" y="103.4" class="small">step 1297</text>
+<circle cx="219.7" cy="269.1" r="5" fill="#d9480f"/>
+<text x="227.7" y="261.1" class="small">step 2594</text>
+<circle cx="288.6" cy="334.0" r="5" fill="#d9480f"/>
+<text x="296.6" y="326.0" class="small">step 3891</text>
+<circle cx="357.6" cy="361.9" r="5" fill="#d9480f"/>
+<text x="365.6" y="353.9" class="small">step 5188</text>
+<circle cx="426.5" cy="371.1" r="5" fill="#d9480f"/>
+<text x="434.5" y="363.1" class="small">step 6485</text>
+<circle cx="495.5" cy="408.2" r="5" fill="#d9480f"/>
+<text x="503.5" y="400.2" class="small">step 7782</text>
+<circle cx="564.5" cy="380.4" r="5" fill="#d9480f"/>
+<text x="572.5" y="372.4" class="small">step 9079</text>
+<circle cx="633.4" cy="408.2" r="5" fill="#d9480f"/>
+<text x="641.4" y="400.2" class="small">step 10376</text>
+<circle cx="702.4" cy="417.5" r="5" fill="#d9480f"/>
+<text x="710.4" y="409.5" class="small">step 11673</text>
+<circle cx="771.4" cy="426.8" r="5" fill="#d9480f"/>
+<text x="779.4" y="418.8" class="small">step 12970</text>
+<circle cx="840.3" cy="417.5" r="5" fill="#d9480f"/>
+<text x="848.3" y="409.5" class="small">step 14267</text>
+<circle cx="909.3" cy="426.8" r="5" fill="#d9480f"/>
+<text x="917.3" y="418.8" class="small">step 15564</text>
+<path d="M 150.7 115.1 L 219.7 297.3 L 288.6 360.9 L 357.6 392.7 L 426.6 413.7 L 495.5 430.3 L 564.5 439.9 L 633.4 450.1 L 702.4 460.0 L 771.4 462.1 L 840.3 468.6 L 909.3 465.8" fill="none" stroke="#1c7ed6" stroke-width="3"/>
+<circle cx="150.7" cy="115.1" r="5" fill="#1c7ed6"/>
+<text x="158.7" y="107.1" class="small">step 1297</text>
+<circle cx="219.7" cy="297.3" r="5" fill="#1c7ed6"/>
+<text x="227.7" y="289.3" class="small">step 2594</text>
+<circle cx="288.6" cy="360.9" r="5" fill="#1c7ed6"/>
+<text x="296.6" y="352.9" class="small">step 3891</text>
+<circle cx="357.6" cy="392.7" r="5" fill="#1c7ed6"/>
+<text x="365.6" y="384.7" class="small">step 5188</text>
+<circle cx="426.6" cy="413.7" r="5" fill="#1c7ed6"/>
+<text x="434.6" y="405.7" class="small">step 6485</text>
+<circle cx="495.5" cy="430.3" r="5" fill="#1c7ed6"/>
+<text x="503.5" y="422.3" class="small">step 7782</text>
+<circle cx="564.5" cy="439.9" r="5" fill="#1c7ed6"/>
+<text x="572.5" y="431.9" class="small">step 9079</text>
+<circle cx="633.4" cy="450.1" r="5" fill="#1c7ed6"/>
+<text x="641.4" y="442.1" class="small">step 10376</text>
+<circle cx="702.4" cy="460.0" r="5" fill="#1c7ed6"/>
+<text x="710.4" y="452.0" class="small">step 11673</text>
+<circle cx="771.4" cy="462.1" r="5" fill="#1c7ed6"/>
+<text x="779.4" y="454.1" class="small">step 12970</text>
+<circle cx="840.3" cy="468.6" r="5" fill="#1c7ed6"/>
+<text x="848.3" y="460.6" class="small">step 14267</text>
+<circle cx="909.3" cy="465.8" r="5" fill="#1c7ed6"/>
+<text x="917.3" y="457.8" class="small">step 15564</text>
+<rect x="760" y="70" width="190" height="58" rx="8" fill="white" stroke="#d1d5db"/>
+<line x1="772" y1="88" x2="794" y2="88" stroke="#d9480f" stroke-width="3"/>
+<circle cx="783" cy="88" r="4" fill="#d9480f"/>
+<text x="802" y="92" class="small">Hash345 50k</text>
+<line x1="772" y1="110" x2="794" y2="110" stroke="#1c7ed6" stroke-width="3"/>
+<circle cx="783" cy="110" r="4" fill="#1c7ed6"/>
+<text x="802" y="114" class="small">Baseline Ngram</text>
+<text x="90" y="570" class="small">Baseline latest: step 15564, bpb 1.217, flops 646.95e15</text>
+<text x="90" y="588" class="small">Hash345 50k latest: step 15564, bpb 1.250, flops 646.94e15. Closest baseline step 15564: bpb 1.217</text>
+</svg>

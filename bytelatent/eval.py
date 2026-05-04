@@ -6,11 +6,9 @@ import math
 import os
 from collections import defaultdict
 from datetime import datetime
+from typing import TYPE_CHECKING, Any
 
 import torch
-from lm_eval import simple_evaluate
-from lm_eval.api.instance import Instance
-from lm_eval.api.model import LM
 from rich.progress import track
 from torch.nn import functional as F
 
@@ -58,6 +56,13 @@ EVAL_FOLDER_NAME = "{:010d}"
 
 logger = logging.getLogger()
 
+if TYPE_CHECKING:
+    from lm_eval.api.instance import Instance
+    from lm_eval.api.model import LM as LMBase
+else:
+    Instance = Any
+    LMBase = object
+
 
 def all_dicts_same(dict_list):
     if not dict_list:  # Check if the list is empty
@@ -79,9 +84,8 @@ class MockAccelerator:
 
 
 # Light wrapper around generator for lm-eval harness
-class EvalHarnessLM(LM):
+class EvalHarnessLM(LMBase):
     def __init__(self, generator):
-        super().__init__()
         self.generator = generator
         self.accelerator = MockAccelerator()
         self._rank = get_global_rank()
@@ -241,8 +245,8 @@ def eval_ppl_on_path(
             total_loss += tok_loss.sum().item()
         else:
             raise NotImplementedError()
-    all_n_bytes = to_py_num(dist_sum(n_bytes))
-    all_total_loss = to_py_num(dist_sum(total_loss))
+    all_n_bytes = to_py_num(dist_sum(n_bytes, reduce_dtype=torch.bfloat16))
+    all_total_loss = to_py_num(dist_sum(total_loss, reduce_dtype=torch.bfloat16))
     return {
         "n_bytes": all_n_bytes,
         "n_bytes_gpu": n_bytes,
@@ -342,6 +346,8 @@ def launch_eval(eval_args: EvalArgs):
 
     task_results = None
     if eval_args.run_tasks:
+        from lm_eval import simple_evaluate
+
         assert eval_args.generator is not None
         assert eval_args.harness is not None
         generator = PackedCausalTransformerGenerator(

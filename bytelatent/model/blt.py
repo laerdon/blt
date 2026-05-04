@@ -1,5 +1,6 @@
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 
+import math
 from enum import Enum, auto
 from typing import Any, Optional
 
@@ -403,6 +404,35 @@ def patch_ids_from_lengths(patch_lengths, seq_len):
     return patch_ids
 
 
+def patch_length_to_sinusoidal_embedding(
+    patch_lengths: torch.Tensor, dim: int, max_timescale: float = 10000.0
+) -> torch.Tensor:
+    """
+    Convert patch lengths [bs, num_patches] into sinusoidal embeddings
+    [bs, num_patches, dim]. Zero-length padded patches map to zeros.
+    """
+    device = patch_lengths.device
+    dtype = torch.float32
+    patch_lengths = patch_lengths.to(dtype=dtype)
+
+    half_dim = dim // 2
+    if half_dim == 0:
+        return torch.zeros(
+            (*patch_lengths.shape, dim), device=device, dtype=dtype
+        )
+
+    exponent = torch.arange(half_dim, device=device, dtype=dtype) / half_dim
+    timescales = torch.exp(-math.log(max_timescale) * exponent)
+    angles = patch_lengths.unsqueeze(-1) * timescales
+    emb = torch.cat([torch.sin(angles), torch.cos(angles)], dim=-1)
+
+    if dim % 2 == 1:
+        emb = torch.cat([emb, torch.zeros_like(emb[..., :1])], dim=-1)
+
+    emb = emb * patch_lengths.ne(0).unsqueeze(-1)
+    return emb
+
+
 class ByteLatentTransformerArgs(BaseTransformerArgs):
     # Basic model configuration
     seed: int = 42
@@ -501,6 +531,7 @@ class ByteLatentTransformerArgs(BaseTransformerArgs):
     encoder_preds_random_toks: float | None = None
     dim_token_emb: int | None = None
     dim_patch_emb: int | None = None
+    use_patch_length_sinusoidal_embedding: bool = False
 
     encoder_ngram_table_dir: str | None = None
     encoder_ngram_to_size_str: str | None = None
@@ -896,6 +927,9 @@ class ByteLatentTransformer(
         self.cross_attn_window_encoder = args.cross_attn_window_encoder
         self.cross_attn_window_decoder = args.cross_attn_window_decoder
         self.cross_attn_use_flex_attention = args.cross_attn_use_flex_attention
+        self.use_patch_length_sinusoidal_embedding = (
+            args.use_patch_length_sinusoidal_embedding
+        )
 
         # Encoder hash configuration
         self.encoder_hash_byte_group_size = args.encoder_hash_byte_group_size
@@ -1111,6 +1145,11 @@ class ByteLatentTransformer(
         else:
             # Reshape h_cross
             h = h_cross.view(bs, patch_lengths.shape[1], -1)
+
+        if self.use_patch_length_sinusoidal_embedding:
+            h = h + patch_length_to_sinusoidal_embedding(
+                patch_lengths, h.shape[-1]
+            ).to(dtype=h.dtype)
 
         # Global transformer
         global_tokens = tokens.new(h.shape[0], h.shape[1]).fill_(self.boe_id)
